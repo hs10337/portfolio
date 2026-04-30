@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+
+  --color-cream: #faf7f2;
+  --color-stone-50: #fafaf8;
+  --color-stone-100: #f3f0eb;
+  --color-stone-200: #e7e2d9;
+  --color-stone-300: #cfc7b8;
+  --color-stone-400: #a89e8a;
+  --color-stone-500: #7a7060;
+  --color-stone-600: #5a513f;
+  --color-stone-700: #3f372a;
+  --color-stone-800: #2a2520;
+  --color-stone-900: #1a1714;
+
+  --color-pink-50: #fbf3f1;
+  --color-lavender-50: #f3f1f8;
+  --color-orange-50: #fdf1ea;
+  --color-orange-500: #d97a3e;
+  --color-orange-600: #b85e29;
+  --color-orange-700: #8f4a21;
+}
+
+:root {
+  --background: var(--color-cream);
+  --foreground: var(--color-stone-900);
+}
+
+html {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: var(--color-orange-50);
+  color: var(--color-stone-900);
+}
