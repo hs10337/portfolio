@@ -1,24 +1,25 @@
 import type { Metadata } from "next";
-import { Inter, Cormorant_Garamond } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
-  variable: "--font-inter",
   subsets: ["latin"],
+  variable: "--font-inter",
   display: "swap",
 });
 
 const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Belle — Product Designer",
+  title: "Belle Lee — Product Designer",
   description:
-    "Product designer crafting AI-native tools, design systems, and thoughtful digital experiences.",
+    "San Francisco–based product designer blending user-centered thinking with data-driven strategy. AI products, design systems, and editorial digital experiences.",
 };
 
 export default function RootLayout({
@@ -27,11 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${cormorant.variable} h-full antialiased`}
-    >
-      <body className="flex min-h-full flex-col">{children}</body>
+    <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

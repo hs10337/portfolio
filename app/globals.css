@@ -1,46 +1,74 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/*
+  Soft future editorial palette.
+  Primitives stay below; semantic tokens reference them. New colors should be
+  added as primitives first, then exposed semantically.
+*/
+
 @theme {
+  /* Primitives — warm neutrals + soft accents */
+  --color-cream-50: #faf6f0;
+  --color-cream-100: #f4ede2;
+  --color-shell-100: #ede4d6;
+  --color-pink-50: #f7e6e1;
+  --color-pink-100: #f0d3cb;
+  --color-lavender-50: #ece7f2;
+  --color-lavender-100: #d9d0e6;
+  --color-ink-900: #1f1b17;
+  --color-ink-700: #3a332d;
+  --color-ink-500: #6b6258;
+  --color-ink-300: #b8b0a6;
+  --color-ink-100: #e5dfd6;
+  --color-ember-300: #e89476;
+  --color-ember-500: #d9613a;
+  --color-ember-700: #b14a25;
+
+  /* Spacing — extends defaults rather than replacing */
+  --spacing-section: 7rem;
+  --spacing-section-lg: 10rem;
+
+  /* Type scale */
+  --text-display: clamp(2.5rem, 5.5vw, 4.75rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.02em;
+
+  --text-eyebrow: 0.7rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.22em;
+}
+
+/* Bind next/font CSS variables into the theme so utilities like font-serif,
+   font-sans resolve to the loaded webfonts. Must be `@theme inline` so the
+   var() expression isn't pre-resolved at build time. */
+@theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
-
-  --color-cream: #faf7f2;
-  --color-stone-50: #fafaf8;
-  --color-stone-100: #f3f0eb;
-  --color-stone-200: #e7e2d9;
-  --color-stone-300: #cfc7b8;
-  --color-stone-400: #a89e8a;
-  --color-stone-500: #7a7060;
-  --color-stone-600: #5a513f;
-  --color-stone-700: #3f372a;
-  --color-stone-800: #2a2520;
-  --color-stone-900: #1a1714;
-
-  --color-pink-50: #fbf3f1;
-  --color-lavender-50: #f3f1f8;
-  --color-orange-50: #fdf1ea;
-  --color-orange-500: #d97a3e;
-  --color-orange-600: #b85e29;
-  --color-orange-700: #8f4a21;
 }
 
-:root {
-  --background: var(--color-cream);
-  --foreground: var(--color-stone-900);
-}
+@layer base {
+  html {
+    color-scheme: light;
+  }
 
-html {
-  background: var(--background);
-  color: var(--foreground);
-}
+  body {
+    background-color: var(--color-cream-50);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 
-body {
-  font-family: var(--font-sans);
-  font-feature-settings: "ss01", "cv11";
-}
+  ::selection {
+    background-color: var(--color-pink-100);
+    color: var(--color-ink-900);
+  }
 
-::selection {
-  background: var(--color-orange-50);
-  color: var(--color-stone-900);
+  :focus-visible {
+    outline: 2px solid var(--color-ember-500);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
