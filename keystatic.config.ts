@@ -14,6 +14,7 @@ export default config({
       path: "content/posts/*",
       format: { contentField: "content" },
       entryLayout: "content",
+      columns: ["status", "date", "blurb", "notionLink"],
       schema: {
         title: fields.slug({
           name: { label: "Title" },
