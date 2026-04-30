@@ -16,7 +16,7 @@ export async function generateMetadata(props: PageProps<"/blog/[slug]">) {
   if (!post) return {};
   return {
     title: `${post.title} — Belle`,
-    description: post.summary,
+    description: post.blurb,
   };
 }
 
@@ -24,7 +24,7 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
   const { slug } = await props.params;
   const post = await getPost(slug);
 
-  if (!post || post.draft) notFound();
+  if (!post || post.status !== "published") notFound();
 
   return (
     <main className="mx-auto max-w-2xl px-6 py-24 sm:py-32">
@@ -37,13 +37,13 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
 
       <header className="mt-10">
         <p className="text-xs uppercase tracking-[0.16em] text-stone-500">
-          {formatDate(post.publishedAt)}
+          {formatDate(post.date)}
         </p>
         <h1 className="mt-3 font-serif text-4xl leading-tight text-stone-900 sm:text-5xl">
           {post.title}
         </h1>
-        {post.summary && (
-          <p className="mt-4 text-lg text-stone-600">{post.summary}</p>
+        {post.blurb && (
+          <p className="mt-4 text-lg text-stone-600">{post.blurb}</p>
         )}
       </header>
 

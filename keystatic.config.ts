@@ -18,37 +18,40 @@ export default config({
         title: fields.slug({
           name: { label: "Title" },
           slug: {
-            label: "URL slug",
-            description: "Used in the post URL.",
+            label: "Slug",
+            description: "bellelee.me/blog/",
           },
         }),
-        publishedAt: fields.date({
-          label: "Published",
+        status: fields.select({
+          label: "Status",
+          options: [
+            { label: "Draft", value: "draft" },
+            { label: "Published", value: "published" },
+          ],
+          defaultValue: "draft",
+        }),
+        date: fields.date({
+          label: "Date",
           defaultValue: { kind: "today" },
         }),
-        summary: fields.text({
-          label: "Summary",
+        image: fields.image({
+          label: "Image",
+          directory: "public/images/posts",
+          publicPath: "/images/posts/",
+        }),
+        categories: fields.array(
+          fields.text({ label: "Category" }),
+          {
+            label: "Categories",
+            itemLabel: (props) => props.value,
+          },
+        ),
+        blurb: fields.text({
+          label: "Blurb",
           description: "One or two sentence preview shown on the index.",
           multiline: true,
           validation: { length: { max: 280 } },
         }),
-        draft: fields.checkbox({
-          label: "Draft",
-          description: "Hide this post from the public site.",
-          defaultValue: false,
-        }),
-        heroImage: fields.image({
-          label: "Hero image",
-          directory: "public/images/posts",
-          publicPath: "/images/posts/",
-        }),
-        tags: fields.array(
-          fields.text({ label: "Tag" }),
-          {
-            label: "Tags",
-            itemLabel: (props) => props.value,
-          },
-        ),
         content: fields.mdx({
           label: "Content",
           options: {
@@ -57,6 +60,10 @@ export default config({
               publicPath: "/images/posts/",
             },
           },
+        }),
+        notionLink: fields.url({
+          label: "Notion Link",
+          description: "Optional source page or URL.",
         }),
       },
     }),

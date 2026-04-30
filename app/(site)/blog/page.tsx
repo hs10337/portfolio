@@ -38,13 +38,13 @@ export default async function BlogIndexPage() {
                 className="group block focus:outline-none"
               >
                 <p className="text-xs uppercase tracking-[0.16em] text-stone-500">
-                  {formatDate(post.publishedAt)}
+                  {formatDate(post.date)}
                 </p>
                 <h2 className="mt-2 font-serif text-2xl text-stone-900 transition-colors group-hover:text-stone-700 group-focus-visible:text-stone-700">
                   {post.title}
                 </h2>
-                {post.summary && (
-                  <p className="mt-2 text-stone-600">{post.summary}</p>
+                {post.blurb && (
+                  <p className="mt-2 text-stone-600">{post.blurb}</p>
                 )}
               </Link>
             </li>

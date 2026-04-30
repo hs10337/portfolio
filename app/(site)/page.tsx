@@ -94,13 +94,13 @@ export default async function Home() {
                     className="group block focus:outline-none"
                   >
                     <p className="text-xs uppercase tracking-[0.16em] text-stone-500">
-                      {formatDate(post.publishedAt)}
+                      {formatDate(post.date)}
                     </p>
                     <h3 className="mt-2 font-serif text-xl text-stone-900 transition-colors group-hover:text-stone-700">
                       {post.title}
                     </h3>
-                    {post.summary && (
-                      <p className="mt-1 text-stone-600">{post.summary}</p>
+                    {post.blurb && (
+                      <p className="mt-1 text-stone-600">{post.blurb}</p>
                     )}
                   </Link>
                 </li>

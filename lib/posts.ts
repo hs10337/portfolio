@@ -6,13 +6,16 @@ import matter from "gray-matter";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 
+export type PostStatus = "draft" | "published";
+
 export type PostFrontmatter = {
   title: string;
-  publishedAt: string;
-  summary: string;
-  draft?: boolean;
-  heroImage?: string;
-  tags?: string[];
+  status: PostStatus;
+  date: string;
+  blurb: string;
+  image?: string;
+  categories?: string[];
+  notionLink?: string;
 };
 
 export type PostMeta = PostFrontmatter & {
@@ -38,11 +41,12 @@ function parseFile(slug: string, raw: string): Post {
   return {
     slug,
     title: fm.title ?? slug,
-    publishedAt: fm.publishedAt ?? "",
-    summary: fm.summary ?? "",
-    draft: fm.draft ?? false,
-    heroImage: fm.heroImage,
-    tags: fm.tags,
+    status: fm.status === "published" ? "published" : "draft",
+    date: fm.date ?? "",
+    blurb: fm.blurb ?? "",
+    image: fm.image,
+    categories: fm.categories,
+    notionLink: fm.notionLink,
     content,
   };
 }
@@ -63,8 +67,8 @@ export async function getAllPosts(opts?: {
   );
 
   return posts
-    .filter((p) => opts?.includeDrafts || !p.draft)
-    .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
+    .filter((p) => opts?.includeDrafts || p.status === "published")
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 export async function getPost(slug: string): Promise<Post | null> {
