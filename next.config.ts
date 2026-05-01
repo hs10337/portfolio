@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
+      { source: "/", destination: "/index.html" },
       { source: "/projects", destination: "/projects/index.html" },
       { source: "/idiom", destination: "/idiom/index.html" },
       { source: "/base-ui/:slug", destination: "/base-ui/:slug/index.html" },
