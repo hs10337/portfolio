@@ -1,293 +1,233 @@
-import Image from "next/image";
 import Link from "next/link";
+import { LiveClock } from "@/components/live-clock";
 
 type Project = {
-  number: string;
   title: string;
-  caption: string;
-  image: string;
-  href: string;
-  status?: "coming-soon";
+  year: string;
+  description: string;
+  href?: string;
 };
 
 const projects: Project[] = [
   {
-    number: "01",
-    title: "Base UI Design System",
-    caption:
-      "Multi-brand design system for all of Blizzard and Battle.net.",
-    image: "/projects/base-ui.png",
-    href: "/base-ui/building-multi-brand-design-system",
+    title: "Neo",
+    year: "2026",
+    description:
+      "Designing an AI-native browser — chat, tasks, daily brief, and a privacy-first feed.",
+    href: "/projects",
   },
   {
-    number: "02",
-    title: "Components in Atomic Design",
-    caption:
-      "Designing flexible components following atomic design principles.",
-    image: "/projects/components-atomic-design.png",
+    title: "Base UI design system",
+    year: "2026",
+    description:
+      "A multi-brand design system built on atomic foundations and clear semantic tokens.",
     href: "/base-ui/components-atomic-design",
   },
   {
-    number: "03",
-    title: "Battle.net Shop",
-    caption: "Product detail page for both new and returning players.",
-    image: "/projects/battlenet-shop.png",
-    href: "#",
+    title: "battle.net news",
+    year: "2026",
+    description:
+      "An editorial news experience for one of the largest gaming communities in the world.",
+    href: "/projects",
   },
   {
-    number: "04",
-    title: "Battle.net News",
-    caption:
-      "Revamping the news page with improved navigation and customizable templates.",
-    image: "/projects/battlenet-news.png",
-    href: "#",
+    title: "battle.net shop",
+    year: "2026",
+    description: "Storefront redesign focused on clarity, trust, and conversion.",
+    href: "/projects",
   },
   {
-    number: "05",
-    title: "Battle.net Blog & CMS",
-    caption:
-      "Simplifying blog presentation and plugin design for a headless CMS.",
-    image: "/projects/battlenet-blog.png",
-    href: "#",
+    title: "battle.net blog & cms",
+    year: "2026",
+    description:
+      "An editorial CMS workflow that lets writers ship polished posts without designer hand-holding.",
+    href: "/projects",
   },
   {
-    number: "07",
-    title: "MyFoodData",
-    caption:
-      "Meal planner app with sophisticated and customizable nutrition data.",
-    image: "/projects/myfooddata.png",
-    href: "#",
+    title: "Brand Bloom",
+    year: "2026",
+    description:
+      "An AI brand assistant for restaurants, bakeries, and small creative businesses.",
+    href: "/projects",
   },
   {
-    number: "08",
-    title: "Idiom",
-    caption:
-      "Context-based language learning app for vocabulary acquisition.",
-    image: "/projects/idiom.png",
+    title: "myfooddata",
+    year: "2026",
+    description: "Rethinking nutrition data for everyday curiosity.",
+    href: "/projects",
+  },
+  {
+    title: "idiom",
+    year: "2025",
+    description:
+      "A language-learning concept that swaps drills for conversation and quiet repetition.",
     href: "/idiom",
-  },
-  {
-    number: "06",
-    title: "Momento",
-    caption:
-      "AI-powered journaling app for new moms to deepen their relationship with their child.",
-    image: "/projects/momento.png",
-    href: "#",
-    status: "coming-soon",
   },
 ];
 
-export default function Page() {
+const tableOfContents = [
+  { num: "01", label: "Projects", href: "/projects" },
+  { num: "02", label: "Writing", href: "/blog" },
+  { num: "03", label: "About me", href: "/about" },
+];
+
+const nodes = [
+  { num: "04", label: "Email", href: "mailto:hello@belle.design", external: true },
+  { num: "05", label: "Résumé", href: "/resume.pdf", external: true },
+  { num: "06", label: "LinkedIn", href: "https://www.linkedin.com/", external: true },
+  { num: "07", label: "Instagram", href: "https://www.instagram.com/", external: true },
+];
+
+function ArrowOut() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <SiteHeader />
-      <main className="flex-1">
-        <Hero />
-        <Work />
-        <About />
-      </main>
-      <SiteFooter />
-    </div>
+    <span aria-hidden="true" className="font-sans text-ink-300">
+      ↗
+    </span>
   );
 }
 
-function SiteHeader() {
+export default function HomePage() {
   return (
-    <header className="sticky top-0 z-20 backdrop-blur-md bg-cream-50/75 border-b border-ink-100/60">
-      <div className="mx-auto max-w-6xl px-6 md:px-10 h-16 flex items-center justify-between">
-        <Link
-          href="/"
-          className="font-serif italic text-lg text-ink-900 tracking-tight"
-        >
-          Belle Lee
-        </Link>
-        <nav aria-label="Primary">
-          <ul className="flex items-center gap-7 text-sm text-ink-700">
-            <li>
-              <Link
-                href="#work"
-                className="hover:text-ink-900 transition-colors"
+    <main className="min-h-screen bg-cream-50 text-ink-900">
+      <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-16 px-6 py-12 md:flex-row md:gap-0 md:px-0 md:py-0">
+        {/* Left: sticky intro + nav */}
+        <aside className="md:sticky md:top-0 md:flex md:h-screen md:w-[520px] md:shrink-0 md:flex-col md:justify-between md:px-10 md:pb-8 md:pt-12">
+          <div className="flex flex-col gap-10">
+            <h1 className="font-serif text-[44px] leading-[1.05] tracking-[-0.01em] text-ink-900 md:text-[52px]">
+              Belle Lee
+            </h1>
+
+            <p className="max-w-[420px] text-[15px] leading-[26px] text-ink-700">
+              Belle is a product designer with a love for systems and an
+              obsessive commitment to craft. She is interested in building
+              meaningful, quietly beautiful AI-native tools that make daily
+              life feel more thoughtful. Currently designing{" "}
+              <span className="text-ink-900">@ Neo</span>. Previously{" "}
+              <span className="text-ink-900">@ Battle.net</span> and{" "}
+              <span className="text-ink-900">@ early-stage startups</span>.
+            </p>
+
+            <div className="flex flex-col gap-5">
+              <p className="font-serif text-[14px] italic leading-none text-ink-500">
+                Table of Contents
+              </p>
+              <ul className="flex list-none flex-col gap-2.5">
+                {tableOfContents.map((link) => (
+                  <li key={link.num}>
+                    <Link
+                      href={link.href}
+                      className="group flex items-baseline gap-3 text-[14px] leading-5 text-ink-900 transition-colors hover:text-ember-700"
+                    >
+                      <span className="w-6 font-mono text-[12px] tracking-wide text-ink-300">
+                        {link.num}
+                      </span>
+                      <span className="flex-1">{link.label}</span>
+                      <span
+                        aria-hidden="true"
+                        className="text-ink-300 transition-transform group-hover:translate-x-0.5 group-hover:text-ember-700"
+                      >
+                        →
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex flex-col gap-5">
+              <p className="font-serif text-[14px] italic leading-none text-ink-500">
+                Nodes
+              </p>
+              <ul className="flex list-none flex-col gap-2.5">
+                {nodes.map((link) => (
+                  <li key={link.num}>
+                    <a
+                      href={link.href}
+                      target={link.external ? "_blank" : undefined}
+                      rel={link.external ? "noopener noreferrer" : undefined}
+                      className="group flex items-baseline gap-3 text-[14px] leading-5 text-ink-900 transition-colors hover:text-ember-700"
+                    >
+                      <span className="w-6 font-mono text-[12px] tracking-wide text-ink-300">
+                        {link.num}
+                      </span>
+                      <span className="flex-1">{link.label}</span>
+                      <span className="transition-colors group-hover:text-ember-700">
+                        <ArrowOut />
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-12 flex flex-col gap-1 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-300 md:mt-0">
+            <p>©2026 Belle Lee · Last updated 05.02.2026</p>
+            <p>
+              San Francisco · <LiveClock />
+            </p>
+          </div>
+        </aside>
+
+        {/* Right: project listings */}
+        <section className="flex flex-1 flex-col md:px-10 md:pb-16 md:pt-[120px]">
+          <p className="font-serif text-[14px] italic leading-none text-ink-500">
+            Selected Work
+          </p>
+
+          <ol className="mt-8 flex list-none flex-col">
+            {projects.map((project, i) => (
+              <li
+                key={project.title}
+                className={
+                  i === 0
+                    ? "border-y border-ink-100"
+                    : "border-b border-ink-100"
+                }
               >
-                Work
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#about"
-                className="hover:text-ink-900 transition-colors"
+                <Link
+                  href={project.href ?? "/projects"}
+                  className="group flex flex-col gap-2 py-7 transition-colors md:flex-row md:items-baseline md:gap-8"
+                >
+                  <div className="flex flex-1 items-baseline justify-between gap-4">
+                    <h2 className="font-serif text-[28px] leading-[1.15] tracking-[-0.01em] text-ink-900 transition-colors group-hover:text-ember-700 md:text-[32px]">
+                      {project.title}
+                    </h2>
+                    <span className="shrink-0 font-mono text-[12px] tracking-wide text-ink-300">
+                      {project.year}
+                    </span>
+                  </div>
+                  <p className="max-w-[360px] text-[14px] leading-[22px] text-ink-500 md:flex-1 md:text-right">
+                    {project.description}
+                  </p>
+                  <span
+                    aria-hidden="true"
+                    className="hidden text-ink-300 transition-all group-hover:translate-x-0.5 group-hover:text-ember-700 md:inline"
+                  >
+                    →
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-24 mb-8 flex flex-col gap-4">
+            <p className="font-serif text-[36px] italic leading-[1.1] tracking-[-0.01em] text-ink-900 md:text-[44px]">
+              Thanks for being here.
+            </p>
+            <p className="text-[14px] leading-[22px] text-ink-500">
+              Want to work together, or just say hi?{" "}
+              <a
+                href="mailto:hello@belle.design"
+                className="text-ink-900 underline decoration-ink-300 underline-offset-4 transition-colors hover:text-ember-700 hover:decoration-ember-500"
               >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#contact"
-                className="hover:text-ink-900 transition-colors"
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </nav>
+                hello@belle.design
+              </a>
+              .
+            </p>
+          </div>
+        </section>
       </div>
-    </header>
-  );
-}
-
-function Hero() {
-  return (
-    <section className="relative overflow-hidden">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(60% 60% at 20% 10%, var(--color-pink-50) 0%, transparent 60%), radial-gradient(50% 50% at 90% 30%, var(--color-lavender-50) 0%, transparent 70%)",
-        }}
-      />
-      <div className="mx-auto max-w-6xl px-6 md:px-10 pt-24 pb-28 md:pt-36 md:pb-40">
-        <p className="text-eyebrow font-sans uppercase text-ink-500 mb-10">
-          Belle Lee · Portfolio · Product Designer
-        </p>
-        <h1 className="font-serif text-display text-ink-900 max-w-4xl">
-          <span className="italic">Hi, I&apos;m Belle.</span>
-        </h1>
-        <p className="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed text-ink-700">
-          A San Francisco–based product designer blending user-centered thinking
-          with data-driven strategy. I bring a startup mindset to design, shaped
-          by my past life as an entrepreneur and growth hacker.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-function Work() {
-  return (
-    <section
-      id="work"
-      className="mx-auto max-w-6xl px-6 md:px-10 pb-section md:pb-section-lg"
-    >
-      <div className="flex items-baseline justify-between mb-12 md:mb-16">
-        <h2 className="text-eyebrow font-sans uppercase text-ink-500">
-          Selected work
-        </h2>
-        <p className="text-xs font-sans uppercase tracking-[0.18em] text-ink-300">
-          {projects.length} projects
-        </p>
-      </div>
-      <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16 md:gap-y-24">
-        {projects.map((p) => (
-          <li key={p.number}>
-            <ProjectCard project={p} />
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
-function ProjectCard({ project }: { project: Project }) {
-  const isComingSoon = project.status === "coming-soon";
-  const cardInner = (
-    <article className="group">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-shell-100 ring-1 ring-ink-100/60">
-        <Image
-          src={project.image}
-          alt=""
-          fill
-          sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-        />
-        {isComingSoon && (
-          <span className="absolute top-4 left-4 rounded-full bg-cream-50/90 px-3 py-1 text-[0.65rem] font-sans uppercase tracking-[0.18em] text-ember-700">
-            Coming soon
-          </span>
-        )}
-      </div>
-      <div className="mt-5 flex items-baseline gap-4">
-        <span className="font-sans text-xs tracking-[0.2em] text-ink-300 mt-0.5">
-          [{project.number}]
-        </span>
-        <div>
-          <h3 className="font-sans text-xl text-ink-900 leading-snug">
-            {project.title}
-          </h3>
-          <p className="mt-2 text-base text-ink-500 leading-relaxed max-w-md">
-            {project.caption}
-          </p>
-        </div>
-      </div>
-    </article>
-  );
-
-  if (isComingSoon) {
-    return <div aria-disabled className="opacity-80">{cardInner}</div>;
-  }
-  return (
-    <Link
-      href={project.href}
-      className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500 focus-visible:ring-offset-4 focus-visible:ring-offset-cream-50 rounded-xl"
-    >
-      {cardInner}
-    </Link>
-  );
-}
-
-function About() {
-  return (
-    <section
-      id="about"
-      className="relative border-t border-ink-100/60"
-    >
-      <div className="mx-auto max-w-6xl px-6 md:px-10 py-section md:py-section-lg grid grid-cols-1 md:grid-cols-12 gap-10">
-        <div className="md:col-span-5">
-          <p className="text-eyebrow font-sans uppercase text-ink-500 mb-6">
-            About
-          </p>
-          <h2 className="font-serif text-display text-ink-900 italic">
-            Let&apos;s chat.
-          </h2>
-          <p
-            id="contact"
-            className="mt-8 text-ink-700"
-          >
-            <a
-              href="mailto:hello@bellelee.com"
-              className="inline-flex items-center gap-2 text-base text-ink-900 underline decoration-ember-500/60 underline-offset-4 hover:decoration-ember-500 transition-colors"
-            >
-              hello@bellelee.com
-            </a>
-          </p>
-        </div>
-        <div className="md:col-span-7 md:pt-2 space-y-6 text-ink-700 text-lg leading-relaxed">
-          <p>
-            I&apos;ve always admired how thoughtful designs have the power to
-            change our world. From working on product design strategy to
-            sparking delight with a single button, I love working on projects
-            that create extraordinary experiences.
-          </p>
-          <p>
-            In my previous life, I was a growth hacker, country manager,
-            entrepreneur, architecture student and third-culture-kid. When
-            I&apos;m not designing, you can find me doodling digital art,
-            running outside, browsing the next baking idea, or making lists of
-            things — trip ideas, illustration inspiration, movies and books.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function SiteFooter() {
-  const year = new Date().getFullYear();
-  return (
-    <footer className="border-t border-ink-100/60">
-      <div className="mx-auto max-w-6xl px-6 md:px-10 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs font-sans uppercase tracking-[0.18em] text-ink-300">
-        <span>© {year} Belle Lee</span>
-        <span>Made with care in San Francisco</span>
-      </div>
-    </footer>
+    </main>
   );
 }
