@@ -146,19 +146,29 @@ function ArrowRight({ className }: { className?: string }) {
   );
 }
 
+const navItems = [
+  { id: "color", index: "01", label: "Color" },
+  { id: "type", index: "02", label: "Typography" },
+  { id: "spacing", index: "03", label: "Spacing" },
+  { id: "components", index: "04", label: "Components" },
+  { id: "states", index: "05", label: "States" },
+];
+
 function Section({
+  id,
   index,
   title,
   intro,
   children,
 }: {
+  id: string;
   index: string;
   title: string;
   intro?: string;
   children: React.ReactNode;
 }) {
   return (
-    <section className="border-t border-ink-100 pt-12">
+    <section id={id} className="scroll-mt-10 border-t border-ink-100 pt-12">
       <div className="mb-10 flex flex-col gap-3">
         <span className="text-eyebrow uppercase text-ink-500">{index}</span>
         <h2 className="font-serif text-[40px] leading-[1.1] tracking-[-0.01em] text-ink-900">
@@ -207,31 +217,64 @@ function SwatchCard({ swatch }: { swatch: Swatch }) {
 export default function DesignSystemPage() {
   return (
     <main className="min-h-screen bg-cream-50 text-ink-900">
-      <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-20 px-6 py-16 md:px-10 md:py-24">
-        {/* Header */}
-        <header className="flex flex-col gap-6">
-          <span className="text-eyebrow uppercase text-ink-500">
-            Internal · Reference
-          </span>
-          <h1 className="font-serif text-display text-ink-900">
-            Design system
-          </h1>
-          <p className="max-w-[60ch] text-[16px] leading-[26px] text-ink-500">
-            Tokens and component patterns in use across the portfolio. Soft
-            future editorial — warm neutrals, restrained accents, refined
-            typography.
+      <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-12 px-6 py-12 md:flex-row md:gap-0 md:px-0 md:py-0">
+        {/* Left: sticky nav */}
+        <aside className="md:sticky md:top-0 md:flex md:h-screen md:w-[280px] md:shrink-0 md:flex-col md:justify-between md:px-8 md:pb-8 md:pt-12">
+          <div className="flex flex-col gap-10">
+            <div className="flex flex-col gap-3">
+              <span className="text-eyebrow uppercase text-ink-500">
+                Internal · Reference
+              </span>
+              <h1 className="font-serif text-[36px] leading-[1.05] tracking-[-0.01em] text-ink-900">
+                Design system
+              </h1>
+            </div>
+            <div className="h-px w-full bg-ink-100" />
+            <nav aria-label="Design system sections">
+              <ul className="flex list-none flex-col gap-3">
+                {navItems.map((item) => (
+                  <li key={item.id}>
+                    <a
+                      href={`#${item.id}`}
+                      className="group flex items-center justify-between gap-3 text-[14px] font-medium leading-5 text-ink-900 transition-colors hover:text-ember-700"
+                    >
+                      <span>
+                        <span className="mr-2 text-ink-300">{item.index}</span>
+                        {item.label}
+                      </span>
+                      <ArrowRight className="size-4 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <div className="h-px w-full bg-ink-100" />
+            <Link
+              href="/"
+              className="group inline-flex w-fit items-center gap-2 text-[14px] font-medium leading-5 text-ink-900 transition-colors hover:text-ember-700"
+            >
+              <ArrowRight className="size-4 -scale-x-100 transition-transform group-hover:-translate-x-0.5" />
+              Back to home
+            </Link>
+          </div>
+          <p className="mt-12 text-[13px] leading-[20px] text-ink-300 md:mt-0">
+            Tokens in app/globals.css
           </p>
-          <Link
-            href="/"
-            className="group inline-flex w-fit items-center gap-2 text-[14px] font-medium leading-5 text-ink-900 transition-colors hover:text-ember-700"
-          >
-            <ArrowRight className="size-4 -scale-x-100 transition-transform group-hover:-translate-x-0.5" />
-            Back to home
-          </Link>
-        </header>
+        </aside>
 
-        {/* Colors */}
+        {/* Right: scrolling content */}
+        <div className="flex flex-1 flex-col gap-20 md:px-10 md:pb-24 md:pt-16">
+          <header className="flex flex-col gap-4">
+            <p className="max-w-[60ch] text-[16px] leading-[26px] text-ink-500">
+              Tokens and component patterns in use across the portfolio. Soft
+              future editorial — warm neutrals, restrained accents, refined
+              typography.
+            </p>
+          </header>
+
+          {/* Colors */}
         <Section
+          id="color"
           index="01 Color"
           title="Primitives"
           intro="Primitive tokens are defined in app/globals.css under @theme. A semantic layer (color.background.primary, color.text.default, etc.) is not yet defined — components reference primitives directly today."
@@ -259,6 +302,7 @@ export default function DesignSystemPage() {
 
         {/* Typography */}
         <Section
+          id="type"
           index="02 Type"
           title="Typography"
           intro="Cormorant Garamond for editorial moments, Inter for UI and body. Bound through next/font CSS variables, exposed as font-serif and font-sans."
@@ -326,6 +370,7 @@ export default function DesignSystemPage() {
 
         {/* Spacing */}
         <Section
+          id="spacing"
           index="03 Spacing"
           title="Spacing scale"
           intro="Section spacing tokens extend Tailwind's defaults rather than replacing them. The 4px base scale (space-1 through space-96) is still available."
@@ -361,6 +406,7 @@ export default function DesignSystemPage() {
 
         {/* Components */}
         <Section
+          id="components"
           index="04 Components"
           title="Patterns in use"
           intro="The portfolio is intentionally small. These are the recurring patterns rendered today, inlined in app/page.tsx."
@@ -534,6 +580,7 @@ export default function DesignSystemPage() {
 
         {/* States */}
         <Section
+          id="states"
           index="05 States"
           title="Selection & focus"
           intro="Defined globally in app/globals.css base layer."
@@ -569,15 +616,16 @@ export default function DesignSystemPage() {
           </div>
         </Section>
 
-        <footer className="border-t border-ink-100 pt-8">
-          <p className="text-[13px] leading-[20px] text-ink-500">
-            Tokens defined in{" "}
-            <span className="font-mono text-ink-900">app/globals.css</span>.
-            See{" "}
-            <span className="font-mono text-ink-900">CLAUDE.md</span> for the
-            broader brand and content direction.
-          </p>
-        </footer>
+          <footer className="border-t border-ink-100 pt-8">
+            <p className="text-[13px] leading-[20px] text-ink-500">
+              Tokens defined in{" "}
+              <span className="font-mono text-ink-900">app/globals.css</span>.
+              See{" "}
+              <span className="font-mono text-ink-900">CLAUDE.md</span> for the
+              broader brand and content direction.
+            </p>
+          </footer>
+        </div>
       </div>
     </main>
   );
