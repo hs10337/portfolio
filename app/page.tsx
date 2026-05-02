@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { LiveClock } from "@/components/live-clock";
 
@@ -5,62 +6,75 @@ type Project = {
   title: string;
   year: string;
   description: string;
+  image?: string;
+  aspect: "square" | "tall";
   href?: string;
 };
 
-const projects: Project[] = [
+const col1: Project[] = [
   {
     title: "Neo",
     year: "2026",
-    description:
-      "Designing an AI-native browser — chat, tasks, daily brief, and a privacy-first feed.",
+    description: "AI-native browser",
+    aspect: "square",
     href: "/projects",
   },
   {
     title: "Base UI design system",
     year: "2026",
-    description:
-      "A multi-brand design system built on atomic foundations and clear semantic tokens.",
+    description: "Multi-brand design system",
+    image: "/projects/base-ui.png",
+    aspect: "tall",
     href: "/base-ui/components-atomic-design",
   },
   {
     title: "battle.net news",
     year: "2026",
-    description:
-      "An editorial news experience for one of the largest gaming communities in the world.",
-    href: "/projects",
-  },
-  {
-    title: "battle.net shop",
-    year: "2026",
-    description: "Storefront redesign focused on clarity, trust, and conversion.",
-    href: "/projects",
-  },
-  {
-    title: "battle.net blog & cms",
-    year: "2026",
-    description:
-      "An editorial CMS workflow that lets writers ship polished posts without designer hand-holding.",
-    href: "/projects",
-  },
-  {
-    title: "Brand Bloom",
-    year: "2026",
-    description:
-      "An AI brand assistant for restaurants, bakeries, and small creative businesses.",
+    description: "Editorial news experience",
+    image: "/projects/battlenet-news.png",
+    aspect: "square",
     href: "/projects",
   },
   {
     title: "myfooddata",
     year: "2026",
-    description: "Rethinking nutrition data for everyday curiosity.",
+    description: "Nutrition data product",
+    image: "/projects/myfooddata.png",
+    aspect: "square",
+    href: "/projects",
+  },
+];
+
+const col2: Project[] = [
+  {
+    title: "Brand Bloom",
+    year: "2026",
+    description: "AI brand assistant",
+    aspect: "tall",
+    href: "/projects",
+  },
+  {
+    title: "battle.net shop",
+    year: "2026",
+    description: "Storefront redesign",
+    image: "/projects/battlenet-shop.png",
+    aspect: "square",
+    href: "/projects",
+  },
+  {
+    title: "battle.net blog & cms",
+    year: "2026",
+    description: "Editorial CMS workflow",
+    image: "/projects/battlenet-blog.png",
+    aspect: "square",
     href: "/projects",
   },
   {
     title: "idiom",
     year: "2025",
-    description:
-      "A language-learning concept that swaps drills for conversation and quiet repetition.",
+    description: "Language learning concept",
+    image: "/projects/idiom.png",
+    aspect: "square",
     href: "/idiom",
   },
 ];
@@ -84,6 +98,52 @@ function ArrowOut() {
       ↗
     </span>
   );
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  const aspect = project.aspect === "tall" ? "aspect-[1/2]" : "aspect-square";
+  const inner = (
+    <div className="flex flex-col gap-2">
+      <div
+        className={`relative w-full overflow-hidden bg-ink-100/70 ${aspect}`}
+      >
+        {project.image && (
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 320px"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        )}
+      </div>
+      <div className="flex flex-col">
+        <div className="flex items-baseline justify-between gap-3">
+          <p className="font-serif text-[18px] leading-[1.2] text-ink-900 transition-colors group-hover:text-ember-700">
+            {project.title}
+          </p>
+          <p className="shrink-0 font-mono text-[11px] tracking-wide text-ink-300">
+            {project.year}
+          </p>
+        </div>
+        <p className="text-[13px] leading-[20px] text-ink-500">
+          {project.description}
+        </p>
+      </div>
+    </div>
+  );
+
+  if (project.href) {
+    return (
+      <Link
+        href={project.href}
+        className="group block focus-visible:outline-none"
+      >
+        {inner}
+      </Link>
+    );
+  }
+  return inner;
 }
 
 export default function HomePage() {
@@ -169,47 +229,24 @@ export default function HomePage() {
           </div>
         </aside>
 
-        {/* Right: project listings */}
+        {/* Right: project image tiles */}
         <section className="flex flex-1 flex-col md:px-10 md:pb-16 md:pt-[120px]">
-          <p className="font-serif text-[14px] italic leading-none text-ink-500">
+          <p className="mb-8 font-serif text-[14px] italic leading-none text-ink-500">
             Selected Work
           </p>
 
-          <ol className="mt-8 flex list-none flex-col">
-            {projects.map((project, i) => (
-              <li
-                key={project.title}
-                className={
-                  i === 0
-                    ? "border-y border-ink-100"
-                    : "border-b border-ink-100"
-                }
-              >
-                <Link
-                  href={project.href ?? "/projects"}
-                  className="group flex flex-col gap-2 py-7 transition-colors md:flex-row md:items-baseline md:gap-8"
-                >
-                  <div className="flex flex-1 items-baseline justify-between gap-4">
-                    <h2 className="font-serif text-[28px] leading-[1.15] tracking-[-0.01em] text-ink-900 transition-colors group-hover:text-ember-700 md:text-[32px]">
-                      {project.title}
-                    </h2>
-                    <span className="shrink-0 font-mono text-[12px] tracking-wide text-ink-300">
-                      {project.year}
-                    </span>
-                  </div>
-                  <p className="max-w-[360px] text-[14px] leading-[22px] text-ink-500 md:flex-1 md:text-right">
-                    {project.description}
-                  </p>
-                  <span
-                    aria-hidden="true"
-                    className="hidden text-ink-300 transition-all group-hover:translate-x-0.5 group-hover:text-ember-700 md:inline"
-                  >
-                    →
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
+          <div className="flex gap-4">
+            <div className="flex flex-1 flex-col gap-4">
+              {col1.map((project) => (
+                <ProjectCard key={project.title} project={project} />
+              ))}
+            </div>
+            <div className="flex flex-1 flex-col gap-4">
+              {col2.map((project) => (
+                <ProjectCard key={project.title} project={project} />
+              ))}
+            </div>
+          </div>
 
           <div className="mt-24 mb-8 flex flex-col gap-4">
             <p className="font-serif text-[36px] italic leading-[1.1] tracking-[-0.01em] text-ink-900 md:text-[44px]">
