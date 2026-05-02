@@ -149,9 +149,9 @@ function ProjectCard({ project }: { project: Project }) {
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-cream-50 text-ink-900">
-      <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-16 px-6 py-12 md:flex-row md:gap-0 md:px-0 md:py-0">
+      <div className="mx-auto flex w-full max-w-[1800px] flex-col gap-16 px-6 py-12 md:flex-row md:gap-8 md:px-10 md:py-0">
         {/* Left: sticky intro + nav */}
-        <aside className="md:sticky md:top-0 md:flex md:h-screen md:w-[520px] md:shrink-0 md:flex-col md:justify-between md:px-10 md:pb-8 md:pt-12">
+        <aside className="md:sticky md:top-0 md:flex md:h-screen md:w-[300px] md:shrink-0 md:flex-col md:justify-between md:px-0 md:pb-8 md:pt-12">
           <div className="flex flex-col gap-10">
             <h1 className="font-serif text-[44px] leading-[1.05] tracking-[-0.01em] text-ink-900 md:text-[52px]">
               Belle Lee
@@ -230,7 +230,7 @@ export default function HomePage() {
         </aside>
 
         {/* Right: project image tiles */}
-        <section className="flex flex-1 flex-col md:px-10 md:pb-16 md:pt-[120px]">
+        <section className="flex flex-1 flex-col md:pb-16 md:pt-[120px]">
           <p className="mb-8 font-serif text-[14px] italic leading-none text-ink-500">
             Selected Work
           </p>
