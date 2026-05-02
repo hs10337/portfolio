@@ -11,18 +11,18 @@
   /* Primitives — neutral near-whites + soft accents.
      Surfaces sit close to pure white with only a whisper of warmth.
      Ember is the single intentional warm accent. */
-  --color-cream-50: #fbfaf8;
-  --color-cream-100: #f2f1ee;
-  --color-shell-100: #e7e6e2;
-  --color-pink-50: #f4ece8;
-  --color-pink-100: #e9d8d2;
-  --color-lavender-50: #eae6ee;
-  --color-lavender-100: #d3cdde;
-  --color-ink-900: #1a1816;
-  --color-ink-700: #34322f;
-  --color-ink-500: #6a6864;
-  --color-ink-300: #b4b2ad;
-  --color-ink-100: #e3e1db;
+  --color-cream-50: #f9fafb;
+  --color-cream-100: #eff1f3;
+  --color-shell-100: #e3e6ea;
+  --color-pink-50: #ece4e6;
+  --color-pink-100: #d4c5ca;
+  --color-lavender-50: #e4e4ec;
+  --color-lavender-100: #cbcbdc;
+  --color-ink-900: #16181a;
+  --color-ink-700: #2f3236;
+  --color-ink-500: #61656b;
+  --color-ink-300: #afb2b6;
+  --color-ink-100: #dee0e3;
   --color-ember-300: #e89476;
   --color-ember-500: #d9613a;
   --color-ember-700: #b14a25;
