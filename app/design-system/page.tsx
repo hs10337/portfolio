@@ -22,32 +22,32 @@ type Swatch = {
 const colorGroups: { label: string; note: string; swatches: Swatch[] }[] = [
   {
     label: "Cream & Shell",
-    note: "Page surfaces and warm neutrals.",
+    note: "Page surfaces and neutral near-whites.",
     swatches: [
-      { name: "Cream 50", varName: "--color-cream-50", hex: "#faf6f0", utility: "bg-cream-50" },
-      { name: "Cream 100", varName: "--color-cream-100", hex: "#f4ede2", utility: "bg-cream-100" },
-      { name: "Shell 100", varName: "--color-shell-100", hex: "#ede4d6", utility: "bg-shell-100" },
+      { name: "Cream 50", varName: "--color-cream-50", hex: "#fbfaf8", utility: "bg-cream-50" },
+      { name: "Cream 100", varName: "--color-cream-100", hex: "#f2f1ee", utility: "bg-cream-100" },
+      { name: "Shell 100", varName: "--color-shell-100", hex: "#e7e6e2", utility: "bg-shell-100" },
     ],
   },
   {
     label: "Pink & Lavender",
     note: "Soft accents for selection, surfaces, and quiet emphasis.",
     swatches: [
-      { name: "Pink 50", varName: "--color-pink-50", hex: "#f7e6e1", utility: "bg-pink-50" },
-      { name: "Pink 100", varName: "--color-pink-100", hex: "#f0d3cb", utility: "bg-pink-100" },
-      { name: "Lavender 50", varName: "--color-lavender-50", hex: "#ece7f2", utility: "bg-lavender-50" },
-      { name: "Lavender 100", varName: "--color-lavender-100", hex: "#d9d0e6", utility: "bg-lavender-100" },
+      { name: "Pink 50", varName: "--color-pink-50", hex: "#f4ece8", utility: "bg-pink-50" },
+      { name: "Pink 100", varName: "--color-pink-100", hex: "#e9d8d2", utility: "bg-pink-100" },
+      { name: "Lavender 50", varName: "--color-lavender-50", hex: "#eae6ee", utility: "bg-lavender-50" },
+      { name: "Lavender 100", varName: "--color-lavender-100", hex: "#d3cdde", utility: "bg-lavender-100" },
     ],
   },
   {
     label: "Ink",
     note: "Type, borders, and quiet UI surfaces. Ink 900 is the default body color.",
     swatches: [
-      { name: "Ink 900", varName: "--color-ink-900", hex: "#1f1b17", utility: "bg-ink-900", onDark: true },
-      { name: "Ink 700", varName: "--color-ink-700", hex: "#3a332d", utility: "bg-ink-700", onDark: true },
-      { name: "Ink 500", varName: "--color-ink-500", hex: "#6b6258", utility: "bg-ink-500", onDark: true },
-      { name: "Ink 300", varName: "--color-ink-300", hex: "#b8b0a6", utility: "bg-ink-300" },
-      { name: "Ink 100", varName: "--color-ink-100", hex: "#e5dfd6", utility: "bg-ink-100" },
+      { name: "Ink 900", varName: "--color-ink-900", hex: "#1a1816", utility: "bg-ink-900", onDark: true },
+      { name: "Ink 700", varName: "--color-ink-700", hex: "#34322f", utility: "bg-ink-700", onDark: true },
+      { name: "Ink 500", varName: "--color-ink-500", hex: "#6a6864", utility: "bg-ink-500", onDark: true },
+      { name: "Ink 300", varName: "--color-ink-300", hex: "#b4b2ad", utility: "bg-ink-300" },
+      { name: "Ink 100", varName: "--color-ink-100", hex: "#e3e1db", utility: "bg-ink-100" },
     ],
   },
   {
